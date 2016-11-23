@@ -17,6 +17,7 @@ import android.widget.Toast;
  */
 public class MyOpenHelper extends SQLiteOpenHelper{
     String TAG;
+    ChatDAO chatDAO;
 
     public MyOpenHelper(Context context) {
         super(context, "chat.sqlite", null, 1);
@@ -43,7 +44,24 @@ public class MyOpenHelper extends SQLiteOpenHelper{
             Log.d(TAG, "생성 실패");
             e.printStackTrace();
         }
+
+        chatDAO = new ChatDAO(db);
+        Chat chat = new Chat();
+        chat.setIp("192.168.0.35");
+        chat.setPort("7777");
+        chat.setNickname("brian");
+        chat.setImg("batman.png");
+
+        try {
+            chatDAO.insert(chat);
+            Log.d(TAG, "입력성공");
+        } catch (Exception e) {
+            Log.d(TAG, "입력실패");
+            e.printStackTrace();
+        }
+
     }
+
     /*이미 같은 파일명이 존재하되,  version 숫자가 틀려야 한다*/
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
 

@@ -51,14 +51,6 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
         SQLiteDatabase db=myOpenHelper.getWritableDatabase();
 
         chatDAO = new ChatDAO(db);
-
-        chat = new Chat();
-        chat.setIp("192.168.0.35");
-        chat.setPort("7777");
-        chat.setNickname("brian");
-        chat.setImg("batman.png");
-        chatDAO.insert(chat);
-
         chat=chatDAO.select(0);
         Log.d(TAG, "Activity의 chat is "+chat);
     }
