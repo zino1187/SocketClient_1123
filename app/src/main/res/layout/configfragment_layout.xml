@@ -6,25 +6,28 @@
     android:layout_margin="20dp">
 
     <EditText
+        android:id="@+id/txt_ip"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="80.1.1.1"
         style="@style/configStyle"/>
 
     <EditText
+        android:id="@+id/txt_port"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="7777"
-        android:id="@+id/editText"
         style="@style/configStyle"/>
 
     <EditText
+        android:id="@+id/txt_nickname"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="brian"
         style="@style/configStyle"/>
 
     <ImageView
+        android:id="@+id/img"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:src="@drawable/superman"/>

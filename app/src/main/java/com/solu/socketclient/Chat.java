@@ -3,7 +3,7 @@ package com.solu.socketclient;
 public class Chat {
     private int chat_id;
     private String ip;
-    private int port;
+    private String port;
     private String nickname;
     private String img;
 
@@ -23,11 +23,11 @@ public class Chat {
         this.ip = ip;
     }
 
-    public int getPort() {
+    public String getPort() {
         return port;
     }
 
-    public void setPort(int port) {
+    public void setPort(String port) {
         this.port = port;
     }
 
