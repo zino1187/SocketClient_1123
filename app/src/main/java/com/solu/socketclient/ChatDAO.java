@@ -49,6 +49,18 @@ public class ChatDAO {
     }
 
     public void update(Chat chat){
+        String sql="update chat set ip=?,port=?,nickname=?";
+
+        try {
+            db.execSQL(sql, new Object[]{
+                chat.getIp(), chat.getPort(), chat.getNickname()
+            });
+            Log.d(TAG, "수정완료");
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            Log.d(TAG, "수정실패");
+        }
 
     }
     public void delete(int chat_id){

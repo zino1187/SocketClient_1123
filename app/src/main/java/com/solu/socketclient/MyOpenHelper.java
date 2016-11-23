@@ -20,7 +20,7 @@ public class MyOpenHelper extends SQLiteOpenHelper{
     ChatDAO chatDAO;
 
     public MyOpenHelper(Context context) {
-        super(context, "chat.sqlite", null, 1);
+        super(context, "chat2.sqlite", null, 1);
         TAG=this.getClass().getName();
     }
 
@@ -59,7 +59,6 @@ public class MyOpenHelper extends SQLiteOpenHelper{
             Log.d(TAG, "입력실패");
             e.printStackTrace();
         }
-
     }
 
     /*이미 같은 파일명이 존재하되,  version 숫자가 틀려야 한다*/

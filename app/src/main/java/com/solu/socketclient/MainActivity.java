@@ -30,6 +30,8 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
         super.onCreate(savedInstanceState);
         TAG=this.getClass().getName();
 
+        Log.d(TAG, "main "+this);
+
         setContentView(R.layout.activity_main);
         viewPager = (ViewPager) findViewById(R.id.viewPager);
         myPagerAdapter = new MyPagerAdapter(getSupportFragmentManager());
@@ -55,7 +57,7 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
         Log.d(TAG, "Activity의 chat is "+chat);
     }
 
-    @Override
+
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_menu, menu);
         return super.onCreateOptionsMenu(menu);

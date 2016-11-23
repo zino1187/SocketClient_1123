@@ -9,21 +9,18 @@
         android:id="@+id/txt_ip"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="80.1.1.1"
         style="@style/configStyle"/>
 
     <EditText
         android:id="@+id/txt_port"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="7777"
         style="@style/configStyle"/>
 
     <EditText
         android:id="@+id/txt_nickname"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="brian"
         style="@style/configStyle"/>
 
     <ImageView
@@ -33,6 +30,7 @@
         android:src="@drawable/superman"/>
 
     <Button
+        android:id="@+id/bt_regist"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="적용"
