@@ -59,8 +59,6 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
         setSupportActionBar(toolbar);
         init();
 
-
-
         chatFragment=(ChatFragment) myPagerAdapter.getItem(0);
 
         /*핸들러 재정의*/
@@ -68,7 +66,7 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
             public void handleMessage(Message message) {
                 /*프레그먼트의 대화내역창에 서버의 메세지 출력!!*/
                 String msg=message.getData().getString("msg");
-                chatFragment.txt_receive.setText(msg);
+                chatFragment.txt_receive.append(msg+"\n");
             }
         };
 
