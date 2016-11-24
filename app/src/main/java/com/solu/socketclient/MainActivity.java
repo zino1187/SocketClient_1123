@@ -17,6 +17,9 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
+import java.io.IOException;
+import java.net.Socket;
+
 public class MainActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener{
     String TAG;
     ViewPager viewPager;
@@ -25,6 +28,12 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
     MyOpenHelper myOpenHelper;
     ChatDAO chatDAO;
     Chat chat;
+
+    /*안드로이드는 자바 se api 지원한다*/
+    Socket socket;
+    String ip;
+    int port;
+    Thread connectThread;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +51,7 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
         /*앱바로 적용되는 시점!!*/
         setSupportActionBar(toolbar);
         init();
+        connectServer();
     }
 
     /*데이터베이스 초기화 및 SQLiteDatabase 객체 얻기*/
@@ -55,6 +65,11 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
         chatDAO = new ChatDAO(db);
         chat=chatDAO.select(0);
         Log.d(TAG, "Activity의 chat is "+chat);
+
+        /*접속 관련 정보 세팅*/
+        ip=chat.getIp();
+        port=Integer.parseInt(chat.getPort());
+
     }
 
 
@@ -100,6 +115,24 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
     @Override
     public void onPageScrollStateChanged(int state) {
     }
+
+    /*--------------------------------------------------------
+     SQLite에 등록된 정보대로,  소켓 서버에 접속하자!!
+    --------------------------------------------------------*/
+    public void connectServer(){
+        /*socket 메모리에 올리는 행위 = 접속시도!!*/
+        connectThread= new Thread(){
+            public void run() {
+                try {
+                    socket = new Socket(ip, port);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        connectThread.start();
+    }
+
 }
 
 
