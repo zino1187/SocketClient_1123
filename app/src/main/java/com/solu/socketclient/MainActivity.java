@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
         /*앱바로 적용되는 시점!!*/
         setSupportActionBar(toolbar);
         init();
-        connectServer();
+
 
 
         chatFragment=(ChatFragment) myPagerAdapter.getItem(0);
@@ -107,6 +107,11 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
     /*메뉴를 선택하면...*/
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
+            case R.id.menu_connect:
+                /*접속시도!!*/
+                connectServer();
+                ;break;
+
             case R.id.menu_chat:
                 viewPager.setCurrentItem(0);
                 ;break;
