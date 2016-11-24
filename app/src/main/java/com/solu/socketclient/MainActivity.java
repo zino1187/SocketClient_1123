@@ -3,6 +3,8 @@ package com.solu.socketclient;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -33,11 +35,16 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
     Socket socket;
     String ip;
     int port;
-    Thread connectThread;
+    Thread connectThread;/*접속용*/
+    ClientThread clientThread;/*대화용*/
+    MainActivity mainActivity;
+    Handler handler;
+    ChatFragment chatFragment;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         TAG=this.getClass().getName();
+        mainActivity=this;
 
         Log.d(TAG, "main "+this);
 
@@ -52,6 +59,19 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
         setSupportActionBar(toolbar);
         init();
         connectServer();
+
+
+        chatFragment=(ChatFragment) myPagerAdapter.getItem(0);
+
+        /*핸들러 재정의*/
+        handler = new Handler(){
+            public void handleMessage(Message message) {
+                /*프레그먼트의 대화내역창에 서버의 메세지 출력!!*/
+                String msg=message.getData().getString("msg");
+                chatFragment.txt_receive.setText(msg);
+            }
+        };
+
     }
 
     /*데이터베이스 초기화 및 SQLiteDatabase 객체 얻기*/
@@ -125,6 +145,9 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
             public void run() {
                 try {
                     socket = new Socket(ip, port);
+
+                    clientThread= new ClientThread(mainActivity, socket);
+                    clientThread.start(); //작동시작!!
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
